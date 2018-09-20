@@ -1,10 +1,12 @@
 const NodeEnvironment = require('jest-environment-node');
 const { Builder, By, until } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
 
 class WebDriverEnvironment extends NodeEnvironment {
   constructor(config) {
     super(config);
     const options = config.testEnvironmentOptions || {};
+    this.headlessMode = options.headlessMode || false;
     this.browserName = options.browser || 'chrome';
     this.seleniumAddress = options.seleniumAddress || null;
   }
@@ -12,19 +14,33 @@ class WebDriverEnvironment extends NodeEnvironment {
   async setup() {
     await super.setup();
 
+    this.driver = await this.generateDriverWithOption();
+
+    this.global.by = By;
+    this.global.browser = this.driver;
+    this.global.element = locator => this.driver.findElement(locator);
+    this.global.element.all = locator => this.driver.findElements(locator);
+    this.global.until = until;
+  }
+
+  async generateDriverWithOption() {
     let driver = new Builder();
+    
     if (this.seleniumAddress) {
       driver = driver.usingServer(this.seleniumAddress);
     }
-    driver = await driver.forBrowser(this.browserName).build();
 
-    this.driver = driver;
+    let browser = driver.forBrowser(this.browserName);
+    let browserWithOption;
 
-    this.global.by = By;
-    this.global.browser = driver;
-    this.global.element = locator => driver.findElement(locator);
-    this.global.element.all = locator => driver.findElements(locator);
-    this.global.until = until;
+    switch (this.browserName) {
+      case 'chrome':
+        browserWithOption = browser.setChromeOptions(this.headlessMode ? new chrome.Options().headless() : null);
+        break;
+      default:
+        browserWithOption = browser;
+    }
+    return await browserWithOption.build();
   }
 
   async teardown() {
