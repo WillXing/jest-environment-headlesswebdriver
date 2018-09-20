@@ -1,0 +1,26 @@
+{
+  "name": "@guardvan/jest-environment-headlesswebdriver",
+  "version": "1.0.0",
+  "description": "",
+  "bundleDependencies": false,
+  "dependencies": {
+    "jest-environment-node": "~22.1.4",
+    "selenium-webdriver": "~4.0.0-alpha.1"
+  },
+  "deprecated": false,
+  "devDependencies": {
+    "jest": "^22.1.4"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "license": "MIT",
+  "main": "modules/WebDriverEnvironment.js",
+  "peerDependencies": {
+    "jest": "^22.1.4"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "vanguard"
+}
