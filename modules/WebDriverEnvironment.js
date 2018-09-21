@@ -25,7 +25,7 @@ class WebDriverEnvironment extends NodeEnvironment {
 
   async generateDriverWithOption() {
     let driver = new Builder();
-    
+
     if (this.seleniumAddress) {
       driver = driver.usingServer(this.seleniumAddress);
     }
@@ -35,7 +35,7 @@ class WebDriverEnvironment extends NodeEnvironment {
 
     switch (this.browserName) {
       case 'chrome':
-        browserWithOption = browser.setChromeOptions(this.headlessMode ? new chrome.Options().headless() : null);
+        browserWithOption = browser.setChromeOptions(this.headlessMode ? new chrome.Options().headless().addArguments('no-sandbox') : null);
         break;
       default:
         browserWithOption = browser;
