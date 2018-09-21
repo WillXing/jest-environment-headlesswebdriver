@@ -6,7 +6,7 @@ class WebDriverEnvironment extends NodeEnvironment {
   constructor(config) {
     super(config);
     const options = config.testEnvironmentOptions || {};
-    this.headlessMode = options.headlessMode || false;
+    this.chromeArgs = options.chromeArgs || null;
     this.browserName = options.browser || 'chrome';
     this.seleniumAddress = options.seleniumAddress || null;
   }
@@ -35,7 +35,7 @@ class WebDriverEnvironment extends NodeEnvironment {
 
     switch (this.browserName) {
       case 'chrome':
-        browserWithOption = browser.setChromeOptions(this.headlessMode ? new chrome.Options().headless().addArguments('no-sandbox') : null);
+        browserWithOption = browser.setChromeOptions(new chrome.Options().addArguments(this.chromeArgs));
         break;
       default:
         browserWithOption = browser;
