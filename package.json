@@ -1,7 +1,7 @@
 {
   "name": "@guardvan/jest-environment-headlesswebdriver",
   "version": "2.0.2",
-  "description": "",
+  "description": "Selenium running environment for jest test.",
   "bundleDependencies": false,
   "dependencies": {
     "jest-environment-node": "~22.1.4",
@@ -9,7 +9,7 @@
   },
   "deprecated": false,
   "devDependencies": {
-    "jest": "^22.1.4"
+    "jest": "^23.6.0"
   },
   "engines": {
     "node": ">=8"
@@ -17,10 +17,14 @@
   "license": "MIT",
   "main": "modules/WebDriverEnvironment.js",
   "peerDependencies": {
-    "jest": "^22.1.4"
+    "jest": "^23.6.0"
   },
   "scripts": {
     "test": "jest"
   },
-  "author": "vanguard"
+  "author": "vanguard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WillXing/jest-environment-headlesswebdriver.git"
+  }
 }
