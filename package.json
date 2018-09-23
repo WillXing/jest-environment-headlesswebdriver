@@ -1,6 +1,6 @@
 {
   "name": "@guardvan/jest-environment-headlesswebdriver",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Selenium running environment for jest test.",
   "bundleDependencies": false,
   "dependencies": {
