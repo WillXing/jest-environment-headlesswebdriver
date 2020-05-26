@@ -2,24 +2,25 @@
   "name": "@guardvan/jest-environment-headlesswebdriver",
   "version": "2.1.0",
   "description": "Selenium running environment for jest test.",
-  "keywords": ["selenium", "jest", "headless", "chromedriver"],
-  "bundleDependencies": false,
+  "keywords": [
+    "selenium",
+    "jest",
+    "headless",
+    "chromedriver"
+  ],
   "dependencies": {
-    "jest-environment-node": "~22.1.4",
-    "selenium-webdriver": "~4.0.0-alpha.1"
+    "jest-environment-node": "26.0.1",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "deprecated": false,
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^26.0.1"
   },
   "engines": {
     "node": ">=8"
   },
   "license": "MIT",
   "main": "modules/WebDriverEnvironment.js",
-  "peerDependencies": {
-    "jest": "^23.6.0"
-  },
   "scripts": {
     "test": "jest"
   },

@@ -1,9 +1,9 @@
-const NodeEnvironment = require('jest-environment-node');
-const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const firefox = require('selenium-webdriver/firefox');
-const ie = require('selenium-webdriver/ie');
-const edge = require('selenium-webdriver/edge');
+const NodeEnvironment = require("jest-environment-node");
+const { Builder, By, until } = require("selenium-webdriver");
+const chrome = require("selenium-webdriver/chrome");
+const firefox = require("selenium-webdriver/firefox");
+const ie = require("selenium-webdriver/ie");
+const edge = require("selenium-webdriver/edge");
 
 class WebDriverEnvironment extends NodeEnvironment {
   constructor(config) {
@@ -13,7 +13,7 @@ class WebDriverEnvironment extends NodeEnvironment {
     this.firefoxArgs = options.firefoxArgs || null;
     this.ieArgs = options.ieArgs || null;
     this.edgeArgs = options.edgeArgs || null;
-    this.browserName = options.browser || 'chrome';
+    this.browserName = options.browser || "chrome";
     this.seleniumAddress = options.seleniumAddress || null;
   }
 
@@ -24,8 +24,8 @@ class WebDriverEnvironment extends NodeEnvironment {
 
     this.global.by = By;
     this.global.browser = this.driver;
-    this.global.element = locator => this.driver.findElement(locator);
-    this.global.element.all = locator => this.driver.findElements(locator);
+    this.global.element = (locator) => this.driver.findElement(locator);
+    this.global.element.all = (locator) => this.driver.findElements(locator);
     this.global.until = until;
   }
 
@@ -40,17 +40,25 @@ class WebDriverEnvironment extends NodeEnvironment {
     let browserWithOption;
 
     switch (this.browserName) {
-      case 'chrome':
-        browserWithOption = browser.setChromeOptions(new chrome.Options().addArguments(this.chromeArgs));
+      case "chrome":
+        browserWithOption = browser.setChromeOptions(
+          new chrome.Options().addArguments(this.chromeArgs)
+        );
         break;
-      case 'firefox':
-        browserWithOption = browser.setFirefoxOptions(new firefox.Options().addArguments(this.firefoxArgs));
+      case "firefox":
+        browserWithOption = browser.setFirefoxOptions(
+          new firefox.Options().addArguments(this.firefoxArgs)
+        );
         break;
-      case 'ie':
-        browserWithOption = browser.setIeOptions(new ie.Options().addArguments(this.ieArgs));
+      case "ie":
+        browserWithOption = browser.setIeOptions(
+          new ie.Options().addArguments(this.ieArgs)
+        );
         break;
-      case 'edge':
-        browserWithOption = browser.setEdgeOptions(new edge.Options().addArguments(this.edgeArgs));
+      case "edge":
+        browserWithOption = browser.setEdgeOptions(
+          new edge.Options().addArguments(this.edgeArgs)
+        );
         break;
       default:
         browserWithOption = browser;
@@ -59,10 +67,9 @@ class WebDriverEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    await this.driver.quit();
+    if (this.driver) await this.driver.quit();
     await super.teardown();
   }
 }
 
 module.exports = WebDriverEnvironment;
-
